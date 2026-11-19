@@ -1,10 +1,10 @@
 import inertia from '@inertiajs/vite';
-import { wayfinder } from '@laravel/vite-plugin-wayfinder';
+import {wayfinder} from '@laravel/vite-plugin-wayfinder';
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
-import { bunny } from 'laravel-vite-plugin/fonts';
-import { defineConfig, lazyPlugins } from 'vite-plus';
+import {bunny} from 'laravel-vite-plugin/fonts';
+import {defineConfig, lazyPlugins} from 'vite-plus';
 
 export default defineConfig({
     plugins: lazyPlugins(() => [
@@ -77,4 +77,10 @@ export default defineConfig({
             stylesheet: 'resources/css/app.css',
         },
     },
+    resolve: {
+        alias: {
+            '@': '/resources/js',
+            '@images': '/resources/images',
+        },
+    }
 });
