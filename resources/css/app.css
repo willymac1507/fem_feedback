@@ -8,10 +8,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-sans:
-        'Jost', ui-sans-serif, system-ui, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
+    --font-sans: 'Jost', ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -43,6 +42,12 @@
     --color-destructive-foreground: var(--destructive-foreground);
     --color-destructive-foreground-hover: var(--destructive-foreground-hover);
 
+    --color-interactive: var(--color-light-gray);
+    --color-interactive-active: var(--secondary);
+    --color-interactive-hover: #CFD7FF;
+    --color-interactive-foreground: var(--secondary);
+    --color-interactive-foreground-active: #FFF;
+
     --color-muted: var(--muted);
     --color-muted-hover: var(--muted);
     --color-muted-foreground: var(--muted-foreground);
@@ -52,6 +57,7 @@
     --color-light-blue: #62BCFA;
     --color-light-gray: #F2F4FF;
     --color-dark-gray: #647196;
+    --color-peach: #F49F85;
     --color-white: #FFFFFF;
     --color-black: #000000;
 
@@ -113,6 +119,7 @@
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.87 0 0);
+    --overlay-height: calc(100vh - 4.5rem);
 }
 
 .dark {

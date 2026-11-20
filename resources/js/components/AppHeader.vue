@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import {Link, usePage} from '@inertiajs/vue3';
-import {BookOpen, Folder, LayoutGrid} from '@lucide/vue';
+import {LayoutGrid} from '@lucide/vue';
 import {computed, ref} from 'vue';
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import {Button} from '@/components/ui/button';
 import {
@@ -11,17 +10,15 @@ import {
     NavigationMenuList,
     navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
-import {
-    Sheet,
-    SheetContent,
-    SheetHeader,
-    SheetTitle,
-} from '@/components/ui/sheet';
+import {Sheet, SheetContent, SheetTitle,} from '@/components/ui/sheet';
 import {useCurrentUrl} from '@/composables/useCurrentUrl';
-import {toUrl} from '@/lib/utils';
 import {dashboard} from '@/routes';
+import headerBackground from '@/assets/background-header.png'
 import type {BreadcrumbItem, NavItem} from '@/types';
 import HamburgerIcon from "@/components/icons/HamburgerIcon.vue";
+import CloseIcon from "@/components/icons/CloseIcon.vue";
+import FeedbackFilter from "@/components/FeedbackFilter.vue";
+import RoadmapSummary from "@/components/RoadmapSummary.vue";
 
 type Props = {
     breadcrumbs?: BreadcrumbItem[];
@@ -45,81 +42,28 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
 ];
-
-const rightNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-    },
-];
 </script>
 
 <template>
     <div>
         <div
-            class="header-background border-b border-sidebar-border/80 h-18">
+            :style="{ backgroundImage: `url(${headerBackground})` }"
+            class="bg-cover bg-center h-18">
             <div
                 class="text-white mx-auto flex h-full items-center px-6 py-4 md:max-w-7xl">
                 <!-- Mobile Menu -->
                 <div class="lg:hidden">
                     <Sheet v-model:open="sheetOpen">
-                        <SheetContent class="w-93.75 p-6" side="right">
+                        <SheetContent class="w-67.75" side="right">
                             <SheetTitle class="sr-only"
                             >Navigation menu
                             </SheetTitle
                             >
-                            <SheetHeader class="flex justify-start text-left">
-                                <AppLogoIcon
-                                    class="size-6 fill-current text-black dark:text-white"
-                                />
-                            </SheetHeader>
                             <div
-                                class="flex h-full flex-1 flex-col justify-between space-y-4 py-6"
+                                class="flex h-full flex-1 flex-col justify-start space-y-6 p-6"
                             >
-                                <nav class="-mx-3 space-y-1">
-                                    <Link
-                                        v-for="item in mainNavItems"
-                                        :key="item.title"
-                                        :class="
-                                            whenCurrentUrl(
-                                                item.href,
-                                                activeItemStyles,
-                                            )
-                                        "
-                                        :href="item.href"
-                                        class="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
-                                    >
-                                        <component
-                                            :is="item.icon"
-                                            v-if="item.icon"
-                                            class="h-5 w-5"
-                                        />
-                                        {{ item.title }}
-                                    </Link>
-                                </nav>
-                                <div class="flex flex-col space-y-4">
-                                    <a
-                                        v-for="item in rightNavItems"
-                                        :key="item.title"
-                                        :href="toUrl(item.href)"
-                                        class="flex items-center space-x-2 text-sm font-medium"
-                                        rel="noopener noreferrer"
-                                        target="_blank"
-                                    >
-                                        <component
-                                            :is="item.icon"
-                                            v-if="item.icon"
-                                            class="h-5 w-5"
-                                        />
-                                        <span>{{ item.title }}</span>
-                                    </a>
-                                </div>
+                                <FeedbackFilter/>
+                                <RoadmapSummary/>
                             </div>
                         </SheetContent>
                     </Sheet>
@@ -171,12 +115,14 @@ const rightNavItems: NavItem[] = [
                 <div class="ml-auto flex items-center space-x-2">
 
                     <Button
-                        class="mr-2 h-9 w-9"
+                        class="mr-2 h-9 w-9 text-white"
                         size="icon"
-                        variant="ghost"
+                        variant="link"
                         @click="sheetOpen = true"
                     >
-                        <HamburgerIcon class="size-5 pt-0.5"/>
+                        <HamburgerIcon v-if="!sheetOpen" class="size-5 pt-0.5"/>
+                        <CloseIcon v-else class="size-5 pt-0.5"/>
+
                     </Button>
                 </div>
             </div>
@@ -189,16 +135,8 @@ const rightNavItems: NavItem[] = [
             <div
                 class="mx-auto flex h-12 w-full items-center justify-start px-4 text-neutral-500 md:max-w-7xl"
             >
-                <Breadcrumbs :breadcrumbs="breadcrumbs"/>
+                <Breadcrumbs :breadcrumbs="breadcrumbs!"/>
             </div>
         </div>
     </div>
 </template>
-
-<style>
-.header-background {
-    background-image: url('@images/background-header.png');
-    background-size: cover;
-    background-position: center;
-}
-</style>
