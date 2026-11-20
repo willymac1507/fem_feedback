@@ -13,7 +13,7 @@ import {
 import {Sheet, SheetContent, SheetTitle,} from '@/components/ui/sheet';
 import {useCurrentUrl} from '@/composables/useCurrentUrl';
 import {dashboard} from '@/routes';
-import headerBackground from '@/assets/background-header.png'
+import headerBackground from '@/assets/background-images/background-header.png'
 import type {BreadcrumbItem, NavItem} from '@/types';
 import HamburgerIcon from "@/components/icons/HamburgerIcon.vue";
 import CloseIcon from "@/components/icons/CloseIcon.vue";
