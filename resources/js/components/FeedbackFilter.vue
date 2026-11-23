@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import NavCard from "./NavCard.vue";
+import ContentCard from "./ContentCard.vue";
 import InteractiveButton1 from "./InteractiveButton1.vue";
 import {useFilterStore} from '@/stores/filter'
 
@@ -21,13 +21,13 @@ function changeFilter(item: string) {
 </script>
 
 <template>
-    <NavCard>
+    <ContentCard>
         <InteractiveButton1 v-for="item in
         filterItems" :key="item"
                             :active="item === store.activeFilter"
                             @changeFilter="changeFilter(item)">
             {{ item }}
         </InteractiveButton1>
-    </NavCard>
+    </ContentCard>
 </template>
 

@@ -2,24 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\DataService;
-use Illuminate\Http\Request;
+use App\Models\Request;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
-    public function __construct(
-        private readonly DataService $dataService
-    )
-    {
-    }
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = $this->dataService->fetch();
+        $data = Request::with('comments.replies')->get();
 
         return Inertia::render('Dashboard', ['data' => $data]);
     }

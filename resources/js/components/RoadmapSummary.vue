@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import NavCard from "@/components/NavCard.vue";
+import ContentCard from "@/components/ContentCard.vue";
 import BulletIcon from "@/components/icons/BulletIcon.vue";
 
 const roadmapItems = [
@@ -11,7 +11,7 @@ const roadmapItems = [
 </script>
 
 <template>
-    <NavCard>
+    <ContentCard>
         <div class="flex flex-col justify-between h-full w-full">
             <div class="flex justify-between w-full mb-8">
                 <h3>Roadmap</h3>
@@ -29,7 +29,7 @@ const roadmapItems = [
             </div>
         </div>
 
-    </NavCard>
+    </ContentCard>
 </template>
 
 <style scoped>

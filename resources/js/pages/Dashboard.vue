@@ -3,6 +3,23 @@ import {Head} from '@inertiajs/vue3';
 import {dashboard} from '@/routes';
 import ArrowDownIcon from "@/components/icons/ArrowDownIcon.vue";
 import PlusIcon from "@/components/icons/PlusIcon.vue";
+import ContentCard from "@/components/ContentCard.vue";
+
+
+type Request = {
+    id: number,
+    title: string,
+    category: string,
+    description: string,
+    status: string,
+    upvote: number,
+    comments?: []
+}
+type Props = {
+    data: Request[]
+}
+
+defineProps<Props>()
 
 defineOptions({
     layout: {
@@ -21,7 +38,7 @@ defineOptions({
 
     <div
         id="dashboard"
-        class="flex h-full flex-1 flex-col gap-4 overflow-x-auto"
+        class="flex h-full flex-1 flex-col gap-4 overflow-x-auto justify-start"
     >
         <div
             class="body-3 w-full h-14 bg-dark-blue py-2 px-6 flex flex-row gap-2 justify-between items-center">
@@ -39,5 +56,8 @@ defineOptions({
             </button>
 
         </div>
+        <ContentCard v-for="request in data">
+            {{ request.title }}
+        </ContentCard>
     </div>
 </template>
