@@ -166,6 +166,10 @@
         @apply bg-background text-foreground;
     }
 
+    button {
+        cursor: pointer
+    }
+
     h1, h2, h3, h4 {
         @apply font-bold;
     }
