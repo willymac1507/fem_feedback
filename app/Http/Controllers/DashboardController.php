@@ -36,9 +36,11 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $category)
     {
-        //
+        $data = Request::with('comments.replies')->where('category', $category)->get();
+
+        return Inertia::render('Dashboard', ['data' => $data]);
     }
 
     /**

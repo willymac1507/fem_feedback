@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import {Head} from '@inertiajs/vue3';
 import {dashboard} from '@/routes';
-import ArrowDownIcon from "@/components/icons/ArrowDownIcon.vue";
-import PlusIcon from "@/components/icons/PlusIcon.vue";
-import ContentCard from "@/components/ContentCard.vue";
+import DashboardHeader from "../components/DashboardHeader.vue";
+import DashboardContent from "../components/DashboardContent.vue";
 
 
 type Request = {
@@ -35,29 +34,11 @@ defineOptions({
 
 <template>
     <Head title="Dashboard"/>
-
+    <DashboardHeader/>
     <div
         id="dashboard"
-        class="flex h-full flex-1 flex-col gap-4 overflow-x-auto justify-start"
+        class="flex min-h-0 flex-1 flex-col gap-4 overflow-auto justify-start px-4"
     >
-        <div
-            class="body-3 w-full h-14 bg-dark-blue py-2 px-6 flex flex-row gap-2 justify-between items-center">
-            <div class="text-white">
-                <span class="font-normal">Sort by : </span>
-                <span class="font-bold">Most Upvotes</span>
-            </div>
-            <button class="mr-auto">
-                <ArrowDownIcon class="text-white"/>
-            </button>
-            <button
-                class="gap-1 bg-primary h-full w-33.5 rounded-lg text-white flex flex-row justify-center items-center">
-                <PlusIcon class=""/>
-                <span class="font-bold">Add Feedback</span>
-            </button>
-
-        </div>
-        <ContentCard v-for="request in data">
-            {{ request.title }}
-        </ContentCard>
+        <DashboardContent :data="data"/>
     </div>
 </template>

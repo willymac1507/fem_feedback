@@ -62,7 +62,8 @@ const mainNavItems: NavItem[] = [
                             <div
                                 class="flex h-full flex-1 flex-col justify-start space-y-6 p-6"
                             >
-                                <FeedbackFilter/>
+                                <FeedbackFilter
+                                    @close-sheet="sheetOpen = false"/>
                                 <RoadmapSummary/>
                             </div>
                         </SheetContent>

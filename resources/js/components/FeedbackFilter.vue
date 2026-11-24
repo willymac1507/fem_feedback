@@ -1,8 +1,12 @@
 <script lang="ts" setup>
 
-import ContentCard from "./ContentCard.vue";
+import NavCard from "./NavCard.vue";
 import InteractiveButton1 from "./InteractiveButton1.vue";
 import {useFilterStore} from '@/stores/filter'
+
+import {router} from "@inertiajs/vue3"
+
+const emit = defineEmits(['closeSheet'])
 
 const filterItems = [
     'All',
@@ -15,19 +19,28 @@ const filterItems = [
 const store = useFilterStore()
 
 function changeFilter(item: string) {
-    store.activeFilter = item
+    if (item === 'All') {
+        router.visit('/dashboard')
+    } else {
+        const preparedItem = item.toLowerCase()
+        console.log(preparedItem)
+        const url = `/dashboard/${preparedItem}/show`
+        store.activeFilter = item
+        router.visit(url)
+    }
+    emit('closeSheet')
 }
 
 </script>
 
 <template>
-    <ContentCard>
+    <NavCard>
         <InteractiveButton1 v-for="item in
         filterItems" :key="item"
                             :active="item === store.activeFilter"
                             @changeFilter="changeFilter(item)">
             {{ item }}
         </InteractiveButton1>
-    </ContentCard>
+    </NavCard>
 </template>
 
