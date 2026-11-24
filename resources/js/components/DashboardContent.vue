@@ -1,14 +1,15 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import ContentCard from "@/components/ContentCard.vue"
 import RequestDetail from "@/components/RequestDetail.vue"
 
 defineProps({
-  data: {},
+    data: {},
 })
 </script>
 
 <template>
-  <ContentCard v-for="request in data">
-    <RequestDetail :request="request"/>
-  </ContentCard>
+    <div id="dropHere"/>
+    <ContentCard v-for="request in data">
+        <RequestDetail :request="request"/>
+    </ContentCard>
 </template>

@@ -36,7 +36,6 @@ defineOptions({
     <Head title="Dashboard"/>
     <DashboardHeader/>
     <div
-        id="dashboard"
         class="flex min-h-0 flex-1 flex-col gap-4 overflow-auto justify-start px-4"
     >
         <DashboardContent :data="data"/>
