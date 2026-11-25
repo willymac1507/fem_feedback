@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import ArrowDownIcon from "@/components/icons/ArrowDownIcon.vue";
 import {router} from "@inertiajs/vue3";
-import {sort} from "@/routes/dashboard";
+import {dashboard} from "@/routes";
 
 const sortOptionSelected = ref(
     'mostUpvotes'
@@ -45,9 +45,12 @@ function updateSortOptions() {
             triggerLabel.value = 'Least Comments';
             break;
     }
-    router.post(sort(), {
+    router.get(dashboard(), {
         'sortField': sortField.value,
         'sortDirection': sortDirection.value,
+    }, {
+        preserveState: true,
+        preserveScroll: true
     })
 }
 

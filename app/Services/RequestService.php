@@ -9,7 +9,9 @@ class RequestService
 {
     public function getInitial(): Collection
     {
-        return RequestModel::with('comments.replies')->orderByDesc('upvote')
+        return RequestModel::with('comments.replies')
+            ->withCount('comments')
+            ->orderByDesc('upvote')
             ->get();
     }
 

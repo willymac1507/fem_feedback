@@ -18,9 +18,11 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(HttpRequest $sortRequest)
+    public function index(HttpRequest $request)
     {
-        $data = $this->service->getInitial();
+        $sortField = $request->query('sortField') ? $request->query('sortField') : 'upvote';
+        $sortDirection = $request->query('sortDirection') ? $request->query('sortDirection') : 'desc';
+        $data = $this->service->getSorted($sortField, $sortDirection);
 
         return Inertia::render('Dashboard', ['data' => $data]);
     }
@@ -28,10 +30,9 @@ class DashboardController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function sort(HttpRequest $sortRequest)
+    public function create()
     {
-        $data = $this->service->getSorted($sortRequest->sortField, $sortRequest->sortDirection);
-        return Inertia::render('Dashboard', ['data' => $data]);
+        //
     }
 
     /**
