@@ -3,16 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Request;
+use App\Services\RequestService;
+use Illuminate\Http\Request as HttpRequest;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
+    public function __construct(
+        private readonly RequestService $service
+    )
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(HttpRequest $sortRequest)
     {
-        $data = Request::with('comments.replies')->get();
+        $data = $this->service->getInitial();
 
         return Inertia::render('Dashboard', ['data' => $data]);
     }
@@ -20,9 +28,10 @@ class DashboardController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function sort(HttpRequest $sortRequest)
     {
-        //
+        $data = $this->service->getSorted($sortRequest->sortField, $sortRequest->sortDirection);
+        return Inertia::render('Dashboard', ['data' => $data]);
     }
 
     /**

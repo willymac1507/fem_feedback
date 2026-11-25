@@ -11,6 +11,7 @@ type Request = {
     description: string,
     status: string,
     upvote: number,
+    comments_count: number,
     comments?: []
 }
 
@@ -19,8 +20,6 @@ type Props = {
 }
 
 const props = defineProps<Props>()
-
-const commentsCount = props.request.comments ? props.request.comments.length : 0
 
 function upvoteAdd() {
     let upvote = props.request.upvote + 1
@@ -57,7 +56,7 @@ function upvoteAdd() {
         <button class="flex flex-row items-center gap-2">
             <CommentsIcon/>
             <span class="text-tertiary">
-                {{ commentsCount }}
+                {{ request.comments_count }}
             </span>
         </button>
     </div>

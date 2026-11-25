@@ -11,6 +11,7 @@
         "types:check": "vue-tsc --noEmit"
     },
     "dependencies": {
+        "@iconify/vue": "^5.0.5",
         "@inertiajs/vite": "^3.0.0",
         "@inertiajs/vue3": "^3.0.0",
         "@lucide/vue": "^1.17.0",

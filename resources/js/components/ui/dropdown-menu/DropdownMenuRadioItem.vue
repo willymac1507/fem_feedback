@@ -1,16 +1,22 @@
-<script setup lang="ts">
-import type { DropdownMenuRadioItemEmits, DropdownMenuRadioItemProps } from "reka-ui"
-import type { HTMLAttributes } from "vue"
-import { Circle } from "@lucide/vue"
-import { reactiveOmit } from "@vueuse/core"
-import {
-  DropdownMenuItemIndicator,
-  DropdownMenuRadioItem,
-  useForwardPropsEmits,
+<script lang="ts" setup>
+import type {
+    DropdownMenuRadioItemEmits,
+    DropdownMenuRadioItemProps
 } from "reka-ui"
-import { cn } from "@/lib/utils"
+import {
+    DropdownMenuItemIndicator,
+    DropdownMenuRadioItem,
+    useForwardPropsEmits,
+} from "reka-ui"
+import type {HTMLAttributes} from "vue"
+import {Icon} from '@iconify/vue'
+import {reactiveOmit} from "@vueuse/core"
+import {cn} from "@/lib/utils"
 
-const props = defineProps<DropdownMenuRadioItemProps & { class?: HTMLAttributes["class"] }>()
+const props = defineProps<DropdownMenuRadioItemProps & {
+    class?: HTMLAttributes["class"]
+    value: string
+}>()
 
 const emits = defineEmits<DropdownMenuRadioItemEmits>()
 
@@ -20,21 +26,20 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
-  <DropdownMenuRadioItem
-    data-slot="dropdown-menu-radio-item"
-    v-bind="forwarded"
-    :class="cn(
-      'focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
+    <DropdownMenuRadioItem
+        :class="cn(
+      'focus:text-primary relative flex cursor-default items-center gap-2 rounded-sm py-1.5 px-4 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
       props.class,
     )"
-  >
-    <span class="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
+        data-slot="dropdown-menu-radio-item"
+        v-bind="forwarded"
+    >
+    <span
+        class="text-primary pointer-events-none absolute right-4 flex size-3.5 items-center justify-center">
       <DropdownMenuItemIndicator>
-        <slot name="indicator-icon">
-          <Circle class="size-2 fill-current" />
-        </slot>
+                        <Icon icon="radix-icons:check"/>
       </DropdownMenuItemIndicator>
     </span>
-    <slot />
-  </DropdownMenuRadioItem>
+        <slot/>
+    </DropdownMenuRadioItem>
 </template>

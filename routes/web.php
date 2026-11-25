@@ -8,6 +8,7 @@ Route::inertia('/', 'Welcome')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('dashboard/sort', [DashboardController::class, 'sort'])->name('dashboard.sort');
     Route::get('dashboard/{category}/show', [DashboardController::class, 'show'])
         ->name('dashboard.show');
     Route::patch('request/{request}/upvote', [RequestController::class, 'upvote'])
@@ -15,4 +16,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';
