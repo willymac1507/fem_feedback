@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Route;
@@ -13,7 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('dashboard.show');
     Route::patch('request/{request}/upvote', [RequestController::class, 'upvote'])
         ->name('request.upvote');
-
+    Route::post('reply/store', [CommentController::class, 'store'])->name('reply.store');
 });
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';

@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->foreignId('comment_id');
             $table->foreignId('user_id');
             $table->text('content');
+            $table->text('replyTo')->nullable();
             $table->timestamps();
         });
     }

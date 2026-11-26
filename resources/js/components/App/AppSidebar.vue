@@ -1,10 +1,10 @@
-<script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
-import { BookOpen, FolderGit2, LayoutGrid } from '@lucide/vue';
-import AppLogo from '@/components/AppLogo.vue';
-import NavFooter from '@/components/NavFooter.vue';
-import NavMain from '@/components/NavMain.vue';
-import NavUser from '@/components/NavUser.vue';
+<script lang="ts" setup>
+import {Link} from '@inertiajs/vue3';
+import {BookOpen, FolderGit2, LayoutGrid} from '@lucide/vue';
+import AppLogo from '@/components/App/AppLogo.vue';
+import NavFooter from '@/components/nav/NavFooter.vue';
+import NavMain from '@/components/nav/NavMain.vue';
+import NavUser from '@/components/nav/NavUser.vue';
 import {
     Sidebar,
     SidebarContent,
@@ -14,8 +14,8 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
-import type { NavItem } from '@/types';
+import {dashboard} from '@/routes';
+import type {NavItem} from '@/types';
 
 const mainNavItems: NavItem[] = [
     {
@@ -44,9 +44,9 @@ const footerNavItems: NavItem[] = [
         <SidebarHeader>
             <SidebarMenu>
                 <SidebarMenuItem>
-                    <SidebarMenuButton size="lg" as-child>
+                    <SidebarMenuButton as-child size="lg">
                         <Link :href="dashboard()">
-                            <AppLogo />
+                            <AppLogo/>
                         </Link>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -54,13 +54,13 @@ const footerNavItems: NavItem[] = [
         </SidebarHeader>
 
         <SidebarContent>
-            <NavMain :items="mainNavItems" />
+            <NavMain :items="mainNavItems"/>
         </SidebarContent>
 
         <SidebarFooter>
-            <NavFooter :items="footerNavItems" />
-            <NavUser />
+            <NavFooter :items="footerNavItems"/>
+            <NavUser/>
         </SidebarFooter>
     </Sidebar>
-    <slot />
+    <slot/>
 </template>

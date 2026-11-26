@@ -1,19 +1,11 @@
 <script lang="ts" setup>
 import {Head} from '@inertiajs/vue3';
 import {dashboard} from '@/routes';
-import DashboardHeader from "../components/DashboardHeader.vue";
-import DashboardContent from "../components/DashboardContent.vue";
+import DashboardHeader from "@/components/DashboardHeader.vue";
+import DashboardContent from "@/components/DashboardContent.vue";
+import type {Request} from '@/types/data'
 
 
-type Request = {
-    id: number,
-    title: string,
-    category: string,
-    description: string,
-    status: string,
-    upvote: number,
-    comments?: []
-}
 type Props = {
     data: Request[]
 }
@@ -35,9 +27,5 @@ defineOptions({
 <template>
     <Head title="Dashboard"/>
     <DashboardHeader/>
-    <div
-        class="flex min-h-0 flex-1 flex-col gap-4 overflow-auto justify-start px-4"
-    >
-        <DashboardContent :data="data"/>
-    </div>
+    <DashboardContent :data="data"/>
 </template>

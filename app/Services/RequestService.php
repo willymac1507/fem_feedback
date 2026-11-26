@@ -7,17 +7,9 @@ use Illuminate\Support\Collection;
 
 class RequestService
 {
-    public function getInitial(): Collection
-    {
-        return RequestModel::with('comments.replies')
-            ->withCount('comments')
-            ->orderByDesc('upvote')
-            ->get();
-    }
-
     public function getSorted($sortField, $sortDir): Collection
     {
-        return RequestModel::with('comments.replies')
+        return RequestModel::with(['comments.replies', 'comments.user', 'comments.replies.user'])
             ->withCount('comments')
             ->orderBy($sortField, $sortDir)
             ->get();

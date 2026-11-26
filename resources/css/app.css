@@ -56,13 +56,13 @@
 
     --color-dark-blue: #373F68;
     --color-light-blue: #62BCFA;
-    --color-light-gray: #F2F4FF;
+    --color-light-gray: #F7F8FD;
     --color-dark-gray: #647196;
     --color-peach: #F49F85;
     --color-white: #FFFFFF;
     --color-black: #000000;
 
-    --color-border: var(--border);
+    --color-border: #979797;
     --color-input: var(--input);
     --color-ring: var(--ring);
 
@@ -77,7 +77,7 @@
 }
 
 :root {
-    --background: #F2F4FE;
+    --background: #F2F4FF;
     --foreground: var(--tertiary);
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
@@ -221,5 +221,9 @@
 
     .btn-interactive:hover {
         @apply bg-interactive-hover
+    }
+
+    .cardContainer {
+        @apply flex min-h-0 flex-1 flex-col gap-4 overflow-auto justify-start px-4
     }
 }

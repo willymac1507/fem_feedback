@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import NavCard from "@/components/NavCard.vue";
+import NavCard from "@/components/nav/NavCard.vue";
 import BulletIcon from "@/components/icons/BulletIcon.vue";
 
 const roadmapItems = [

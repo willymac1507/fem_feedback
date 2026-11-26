@@ -3,23 +3,14 @@
 import ArrowUpIcon from "@/components/icons/ArrowUpIcon.vue";
 import CommentsIcon from "@/components/icons/CommentsIcon.vue";
 import {router} from "@inertiajs/vue3"
-
-type Request = {
-    id: number,
-    title: string,
-    category: string,
-    description: string,
-    status: string,
-    upvote: number,
-    comments_count: number,
-    comments?: []
-}
+import {Request} from "@/types/data";
 
 type Props = {
     request: Request
 }
 
 const props = defineProps<Props>()
+const emit = defineEmits(["requestSelected"])
 
 function upvoteAdd() {
     let upvote = props.request.upvote + 1
@@ -53,7 +44,8 @@ function upvoteAdd() {
                 {{ request.upvote }}
             </span>
         </button>
-        <button class="flex flex-row items-center gap-2">
+        <button class="flex flex-row items-center gap-2"
+                @click="$emit('requestSelected', request)">
             <CommentsIcon/>
             <span class="text-tertiary">
                 {{ request.comments_count }}

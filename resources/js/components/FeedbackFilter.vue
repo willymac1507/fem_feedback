@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import NavCard from "./NavCard.vue";
+import NavCard from "./nav/NavCard.vue";
 import InteractiveButton1 from "./InteractiveButton1.vue";
 import {useFilterStore} from '@/stores/filter'
 

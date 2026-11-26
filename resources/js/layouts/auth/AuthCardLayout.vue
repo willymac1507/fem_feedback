@@ -1,6 +1,6 @@
-<script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
+<script lang="ts" setup>
+import {Link} from '@inertiajs/vue3';
+import AppLogoIcon from '@/components/icons/AppLogoIcon.vue';
 import {
     Card,
     CardContent,
@@ -8,7 +8,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { home } from '@/routes';
+import {home} from '@/routes';
 
 defineProps<{
     title?: string;
@@ -41,7 +41,7 @@ defineProps<{
                         </CardDescription>
                     </CardHeader>
                     <CardContent class="px-10 py-8">
-                        <slot />
+                        <slot/>
                     </CardContent>
                 </Card>
             </div>

@@ -11,9 +11,7 @@ class DashboardController extends Controller
 {
     public function __construct(
         private readonly RequestService $service
-    )
-    {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.
