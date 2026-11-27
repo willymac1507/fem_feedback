@@ -2,15 +2,20 @@
 import type {Comment} from "@/types/data.ts"
 import {computed, ref} from "vue";
 import TextField from "@/components/forms/TextField.vue";
-import {router, useForm, usePage} from "@inertiajs/vue3";
+import {useForm, usePage} from "@inertiajs/vue3";
+import ReplyDisplay from "@/components/ui/ReplyDisplay.vue";
+import {getImage} from "@/composables/useUserImage";
+import {useCommentsStore} from "@/stores/comments";
 
 interface Props {
     comment: Comment,
-    imageUrl: string
+    imageUrl: string,
 }
 
+const emit = defineEmits(['repliedToComment'])
 const props = defineProps<Props>();
 const page = usePage()
+const store = useCommentsStore()
 const form = useForm({
     content: null,
     comment_id: props.comment.id,
@@ -25,11 +30,10 @@ const replies = computed(() => {
 })
 
 function submitReply() {
+    replyOpen.value = false
     form.post('/reply/store', {
         onSuccess: () => {
-            router.reload({
-                only: ['comment'],
-            })
+            emit('repliedToComment')
         },
     })
 }
@@ -73,6 +77,15 @@ function submitReply() {
                 </button>
             </form>
 
+        </div>
+        <div v-for="reply in replies" v-if="comment.replies"
+             :key="reply.id"
+             class="w-full border-l border-l-border pl-5.75">
+            <ReplyDisplay :imageUrl="getImage(reply.user)"
+                          :parentComment="comment.id"
+                          :reply="reply"
+                          :replyTo="comment.user.username"
+            />
         </div>
     </div>
 </template>

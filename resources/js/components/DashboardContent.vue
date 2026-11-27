@@ -2,7 +2,7 @@
 import ContentCard from "@/components/ContentCard.vue"
 import RequestDetail from "@/components/RequestDetail.vue"
 import {Request} from "@/types/data";
-import {ref, watch} from "vue";
+import {computed, ref} from "vue";
 import CommentsDetail from "./CommentsDetail.vue";
 
 interface Props {
@@ -13,14 +13,16 @@ const props = defineProps<Props>()
 
 let showMany = ref(true)
 let showDetail = ref(false)
-let selectedRequest = ref<Request>(props.data[0])
+let selectedRequestId = ref<number>(props.data[0].id)
 
-watch(selectedRequest, () => {
-
+const selectedRequest = computed(() => {
+    return props.data.find(
+        request => request.id === selectedRequestId.value
+    )
 })
 
-function selectRequest(index: number) {
-    selectedRequest.value = props.data[index]
+function selectRequest(id: number) {
+    selectedRequestId.value = id
     showMany.value = !showMany.value
     showDetail.value = !showDetail.value
 }
@@ -33,18 +35,18 @@ function selectRequest(index: number) {
         <ContentCard v-for="(request, index) in data"
                      :key="index">
             <RequestDetail :request="request"
-                           @requestSelected="selectRequest(index)"
+                           @requestSelected="selectRequest(request.id)"
             />
         </ContentCard>
     </div>
 
     <div v-if="showDetail" class="cardContainer">
         <ContentCard>
-            <RequestDetail :request="selectedRequest"
+            <RequestDetail v-if="selectedRequest" :request="selectedRequest"
                            @requestSelected="selectRequest(0)"/>
         </ContentCard>
         <ContentCard class="gap-y-0!">
-            <CommentsDetail v-if="selectedRequest.comments"
+            <CommentsDetail v-if="selectedRequest && selectedRequest.comments"
                             :comments="selectedRequest.comments"/>
         </ContentCard>
     </div>
